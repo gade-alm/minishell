@@ -6,7 +6,7 @@
 #    By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 10:52:52 by gabriel           #+#    #+#              #
-#    Updated: 2023/01/30 12:17:04 by gade-alm         ###   ########.fr        #
+#    Updated: 2023/01/30 15:51:53 by gade-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,24 @@ OBJS_DIR	= objs
 
 NAME		= minishell
 
+ifeq ($(shell, uname -s), Linux)
+	INC		= -I inc -I /usr/include/readline
+	LIBS	= -lreadline
+else
+	INC		= -I inc -I /opt/homebrew/include/readline
+	LIBS	= -L /opt/homebrew/lib -lreadline
+endif
+
 CC			= cc
 
-CFLAGS 		= -Wall -Wextra -Werror -pthread -I inc -g -fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror $(INC) -g -fsanitize=address
 
 RM 			= rm -rf
 
 all: $(NAME)
 
 $(NAME):	$(OBJS)
-		$(CC) $(CFLAGS) -lreadline $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) $(LIBS) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 			mkdir -p $(OBJS_DIR)

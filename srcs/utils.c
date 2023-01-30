@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 12:01:47 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/01/30 15:41:33 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:52:17 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,29 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-int	ft_args_counter(char const *s, char *stop)
-{
-	int		i;
-	int		counter;
+// int	ft_args_counter(char const *s, char *stop)
+// {
+// 	int		i;
+// 	int		counter;
 
-	i = -1;
-	counter = 0;
-	while (s[++i])
-	{
-		while (strrchr(stop, s[i]))
-			i++;
-		if (s[i] != '\0')
-			counter++;
-		while (s[i] != stop && s[i] != '\0')
-			i++;
-	}
-	return (counter);
-}
+// 	i = -1;
+// 	counter = 0;
+// 	while (s[++i])
+// 	{
+// 		while (strrchr(stop, s[i]))
+// 			i++;
+// 		if (s[i] != '\0')
+// 			counter++;
+// 		while (s[i] != stop && s[i] != '\0')
+// 			i++;
+// 	}
+// 	return (counter);
+// }
 
-char	**split_args(char **ret , char *str, char stop)
-{
-	int	i;
+// char	**split_args(char **ret , char *str, char stop)
+// {
+// 	int	i;
 
-	i = -1;
-	while (*str )
-}
+// 	i = -1;
+// 	while (*str )
+// }
