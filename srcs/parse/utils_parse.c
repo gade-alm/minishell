@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 11:13:25 by gabriel           #+#    #+#             */
-/*   Updated: 2023/02/02 16:03:40 by gade-alm         ###   ########.fr       */
+/*   Created: 2023/01/31 16:35:10 by gade-alm          #+#    #+#             */
+/*   Updated: 2023/02/02 11:59:08 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	main(int ac, char **av)
+int	check_quotes(char *str, char c, int *i)
 {
-	char	*str;
+	int	cpy;
 
-	(void)ac;
-	(void)av;
-	while (1)
+	if (!str[*i + 1])
+		return (0);
+	cpy = *i + 1;
+	while (str[cpy])
 	{
-		str = readline("$>>:");
-		if (str && *str)
-			add_history(str);
-		while (str != NULL)
+		printf("CHAR %c\n", c);
+		if (c == '\"')
 		{
-			str = ft_strtok(str, "\'\"|<>");
-			printf("%s\n", str);
+			while (str[cpy] != c)
+				cpy++;
+			if (str[cpy + 1] != ' ')
+				cpy++;
 		}
-		if (ft_strcmp(str, "exit"))
-		{
-			free (str);
-			return (0);
-		}
+		if (str[cpy] == c)
+			*i = cpy;
+		cpy++;
+		return (1);
 	}
+	*i = cpy;
+	printf("%i\n", *i);
 	return (0);
 }

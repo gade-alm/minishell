@@ -6,13 +6,15 @@
 #    By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 10:52:52 by gabriel           #+#    #+#              #
-#    Updated: 2023/01/30 15:51:53 by gade-alm         ###   ########.fr        #
+#    Updated: 2023/02/01 17:30:04 by gade-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		= $(SRCS_DIR)/main.c \
 			$(SRCS_DIR)/receive_args.c \
 			$(SRCS_DIR)/utils.c	\
+			$(SRCS_DIR)/parse/split.c \
+			$(SRCS_DIR)/parse/utils_parse.c \
 
 SRCS_DIR	= srcs
 
@@ -22,7 +24,7 @@ OBJS_DIR	= objs
 
 NAME		= minishell
 
-ifeq ($(shell, uname -s), Linux)
+ifeq ($(shell uname -s), Linux)
 	INC		= -I inc -I /usr/include/readline
 	LIBS	= -lreadline
 else
@@ -42,7 +44,7 @@ $(NAME):	$(OBJS)
 		$(CC) $(CFLAGS) $(LIBS) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-			mkdir -p $(OBJS_DIR)
+			mkdir -p $(@D)
 			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
