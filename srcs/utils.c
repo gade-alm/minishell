@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 12:01:47 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/02 15:49:59 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:19:49 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,32 @@ char	*ft_strrchr(const char *s, int c)
 	char	*str;
 	int		len;
 
+	if (!s)
+		return (NULL);
 	len = -1;
 	str = (char *)s;
 	while (str[++len])
 		;
 	while (len >= 0)
 	{
-		if (str[len] == (unsigned char) c)
+		if (str[len] == (char) c)
 			return ((char *)&str[len]);
 		len--;
 	}
 	return (NULL);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	char	*str;
+	int		a;
+
+	if (!s)
+		return (NULL);
+	a = -1;
+	str = (char *) s;
+	while (str[++a] && str[a] != (char)c)
+		if (str[a] == '\0')
+			return (NULL);
+	return (&str[a]);
 }

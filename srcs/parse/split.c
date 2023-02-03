@@ -6,69 +6,52 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:39:01 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/02 16:05:25 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:15:03 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	check_delim(char c, char *str)
+int	char_delim(char *str, int i, char *delim)
 {
-	while (*str)
+	if (ft_strrchr(delim, str[i]))
 	{
-		if (c == *str)
-			return (1);
-		str++;
-	}
-	return (0);
-}
-
-char	*ft_strtok(char	*str, char *delim)
-{
-	static char	*cpy_str;
-	char		*ret;
-	int			i;
-
-	if (str)
-		cpy_str = str;
-	if (!cpy_str)
-		return (NULL);
-	ret = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	i = -1;
-	while (cpy_str[++i])
-	{
-		if (!(check_delim(cpy_str[i], delim)))
-			ret[i] = cpy_str[i];
-		else
-		{
-			ret[i] = '\0';
+		while (str[i] && ft_strrchr(delim, str[i]))
 			i++;
-			return (ret);
-		}
+		return (i);
 	}
-	return (ret);
+	while (!ft_strrchr(delim, str[i]))
+	{
+		if (str[i] == '\"')
+			while (str[i] && str[i] != '\"')
+				i++;
+		if (str[i] == '\'')
+			while (str[i] && str[i] != '\'')
+				i++;
+		if (str[i] && !ft_strrchr(delim, str[i]))
+			i++;
+	}
+	return (i);
 }
 
-// int	count_args(char *str)
-// {
-// 	int	i;
-// 	int	count;
+int	count_args(char *str)
+{
+	int	i;
+	int	count;
 
-// 	count = 0;
-// 	i = 0;
-// 	while (str[i] == ' ' || str[i] == '\t')
-// 		i++;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '\'')
-// 		{
-// 			if (check_quotes(str, '\'', &i))
-// 				count++;
-// 		}
-// 		else if (str[i] == '\"')
-// 			if (check_quotes(str, '\"', &i))
-// 				count++;
-// 		i++;
-// 	}
-// 	return (count);
-// }
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+		if (str[i] == '<' || str[i] == '<' || str[i] == '|')
+			i = char_delim(str, i, "<>|");
+		else if (str[i])
+			i = char_delim(str, i, " \t<>|");
+		else
+			break ;
+		count++;
+	}
+	return (count);
+}
