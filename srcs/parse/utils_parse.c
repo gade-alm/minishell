@@ -6,35 +6,57 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:35:10 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/02 11:59:08 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:02:09 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	check_quotes(char *str, char c, int *i)
+int	char_delim(char *str, int i, char *delim)
 {
-	int	cpy;
-
-	if (!str[*i + 1])
-		return (0);
-	cpy = *i + 1;
-	while (str[cpy])
+	if (ft_strrchr(delim, str[i]))
 	{
-		printf("CHAR %c\n", c);
-		if (c == '\"')
-		{
-			while (str[cpy] != c)
-				cpy++;
-			if (str[cpy + 1] != ' ')
-				cpy++;
-		}
-		if (str[cpy] == c)
-			*i = cpy;
-		cpy++;
-		return (1);
+		while (str[i] && ft_strrchr(delim, str[i]))
+			i++;
+		return (i);
 	}
-	*i = cpy;
-	printf("%i\n", *i);
-	return (0);
+	while (!ft_strrchr(delim, str[i]))
+	{
+		if (str[i] == '\"')
+			while (str[i] && str[i] != '\"')
+				i++;
+		if (str[i] == '\'')
+			while (str[i] && str[i] != '\'')
+				i++;
+		if (str[i] && !ft_strrchr(delim, str[i]))
+			i++;
+	}
+	return (i);
+}
+
+int	count_args(char *str)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (is_space(str[i]))
+			i++;
+		if (str[i] == '<' || str[i] == '<' || str[i] == '|')
+			i = char_delim(str, i, "<>|");
+		else if (str[i])
+			i = char_delim(str, i, " \t<>|");
+		else
+			break ;
+		count++;
+	}
+	return (count);
+}
+
+int	is_space(char str)
+{
+	return (str == ' ' || str == '\t');
 }

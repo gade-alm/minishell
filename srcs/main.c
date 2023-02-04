@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:13:25 by gabriel           #+#    #+#             */
-/*   Updated: 2023/02/03 16:00:12 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:26:33 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	main(int ac, char **av)
 		str = readline("$>>:");
 		if (str && *str)
 			add_history(str);
-		printf("%i\n", count_args(str));
-		if (ft_strcmp(str, "exit"))
+		if (str && *str)
+			ft_split(str, ' ');
+		if (ft_strcmp(str, "exit\n"))
 		{
 			free (str);
 			return (0);
