@@ -6,60 +6,61 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:39:01 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/04 12:35:13 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:31:15 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-
-char	*copy_args(char *s, char delim)
+//Take the string and iterate until it finds a delimiter, then return the word
+//before it
+char	*copy_args(char *s, char *delim)
 {
-	char			*word;
-	int				i;
-	int				len;
+	char	*word;
+	int		i;
+	int		len;
 
 	i = 0;
 	len = 0;
-	while (s[len] && s[len] != delim)
+	while (s[len] && !(is_delim(s[len], delim)))
 		len++;
 	word = (char *)malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	while (s[i] && s[i] != delim)
+	while (i < len && !(is_delim(s[i], delim)))
 	{
 		word[i] = s[i];
 		i++;
 	}
-	word[i] = '\0';
+	if (is_delim(word[i], delim))
+		word[i] = '\0';
 	return (word);
 }
 
-char	**ft_split(char *str, char delim)
+char	**ft_split(char *str, char *delim)
 {
 	char	**copy_str;
 	int		args_num;
 	int		i;
 
+	if (!str || !delim)
+		return (NULL);
 	args_num = count_args(str);
 	copy_str = malloc(sizeof(char *) * (args_num + 1));
 	if (!copy_str)
 		return (NULL);
 	i = 0;
-	while (args_num-- > 0)
+	while (i < args_num)
 	{
-		while (is_space(str[++i]))
-			;
-		if (str[i] != delim && str[i])
+		while (is_delim(*str, delim))
+			str++;
+		if (!(is_delim(*str, delim)))
 		{
-			copy_str[i] = copy_args(str, delim);
-			i++;
-			while (str[i] != delim && str[i])
-				i++;
+			copy_str[i++] = copy_args(str, delim);
+			while (*str && !(is_delim(*str, delim)))
+				str++;
 		}
 	}
-	for (int j = 0; j < i; j++)
-		printf("%s\n", copy_str[j]);
 	copy_str[i] = NULL;
 	return (copy_str);
 }

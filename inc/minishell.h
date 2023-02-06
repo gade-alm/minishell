@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:53:03 by gabriel           #+#    #+#             */
-/*   Updated: 2023/02/04 12:26:05 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:31:26 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,18 @@ typedef struct s_args{
 	char	*next;
 }	t_args;
 
+//UTILS AREA
 int		ft_strlen(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int		is_space(char str);
 char	*ft_strrchr(const char *s, int c);
-int		count_args(char *str);
 char	*ft_strchr(const char *s, int c);
-char	*copy_args(char *s, char delim);
-char	**ft_split(char *str, char delim);
+t_args	*init_args(void);
 
+//PARSE AREA
+int		count_args(char *str);
+int		is_delim(char str, char *delim);
+char	*copy_args(char *s, char *delim);
+char	**ft_split(char *str, char *delim);
 
 #endif

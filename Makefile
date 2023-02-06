@@ -6,7 +6,7 @@
 #    By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 10:52:52 by gabriel           #+#    #+#              #
-#    Updated: 2023/02/01 17:30:04 by gade-alm         ###   ########.fr        #
+#    Updated: 2023/02/06 13:32:00 by gade-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS		= $(SRCS_DIR)/main.c \
 			$(SRCS_DIR)/utils.c	\
 			$(SRCS_DIR)/parse/split.c \
 			$(SRCS_DIR)/parse/utils_parse.c \
+			$(SRCS_DIR)/parse/init_args.c \
 
 SRCS_DIR	= srcs
 
@@ -48,7 +49,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_DIR)
+	$(RM) $(OBJS_DIR) a.out
 	
 fclean: clean
 	$(RM) $(NAME) $(OBJS)

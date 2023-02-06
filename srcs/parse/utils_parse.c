@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:35:10 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/04 12:02:09 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:23:31 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,17 @@ int	count_args(char *str)
 		count++;
 	}
 	return (count);
+}
+
+int	is_delim(char str, char *delim)
+{
+	int	i;
+
+	i = -1;
+	while (delim[++i])
+		if (str == delim[i])
+			return (1);
+	return (0);
 }
 
 int	is_space(char str)
