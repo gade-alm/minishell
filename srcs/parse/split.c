@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:39:01 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/06 13:31:15 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:37:51 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,27 @@ char	*copy_args(char *s, char *delim)
 	char	*word;
 	int		i;
 	int		len;
+	int		delimited;
 
-	i = 0;
-	len = 0;
-	while (s[len] && !(is_delim(s[len], delim)))
-		len++;
+	len = -1;
+	if (!is_delim(s[0], delim))
+		while (s[++len] && !(is_delim(s[len], delim)))
+			delimited = 0;
+	else
+		while (s[++len] && is_delim(s[len], delim))
+			delimited = 1;
 	word = (char *)malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	while (i < len && !(is_delim(s[i], delim)))
-	{
-		word[i] = s[i];
-		i++;
-	}
-	if (is_delim(word[i], delim))
-		word[i] = '\0';
+	i = -1;
+	if (delimited == 1)
+		while (s[++i] && (is_delim(s[i], delim) && !(is_space(s[len]))))
+			word[i] = s[i];
+	else
+		while (s[++i] && (!is_delim(s[i], delim) && !(is_space(s[len]))))
+			word[i] = s[i];
+	word[i] = '\0';
+	printf("%s\n", word);
 	return (word);
 }
 
@@ -49,14 +55,17 @@ char	**ft_split(char *str, char *delim)
 	copy_str = malloc(sizeof(char *) * (args_num + 1));
 	if (!copy_str)
 		return (NULL);
-	i = 0;
-	while (i < args_num)
+	i = -1;
+	while (++i < args_num)
 	{
 		while (is_delim(*str, delim))
+		{
+			copy_str[i] = copy_args(str, delim);
 			str++;
+		}
 		if (!(is_delim(*str, delim)))
 		{
-			copy_str[i++] = copy_args(str, delim);
+			copy_str[i] = copy_args(str, delim);
 			while (*str && !(is_delim(*str, delim)))
 				str++;
 		}

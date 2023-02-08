@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:35:10 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/06 12:23:31 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:02:23 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,21 @@ int	is_delim(char str, char *delim)
 int	is_space(char str)
 {
 	return (str == ' ' || str == '\t');
+}
+
+int	is_quotes(char *str, int i, char quote)
+{
+	if (quote == '"')
+	{
+		while (str[++i])
+			if (str[i] == quote)
+				return (1);
+	}	
+	if (quote == '\'')
+	{
+		while (str[++i])
+			if (str[i] == quote)
+				return (1);
+	}
+	return (0);
 }
