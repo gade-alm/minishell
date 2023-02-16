@@ -6,70 +6,56 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:39:01 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/08 16:37:51 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:33:40 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-//Take the string and iterate until it finds a delimiter, then return the word
-//before it
-char	*copy_args(char *s, char *delim)
+char	*ft_word(const char *s, char c)
 {
-	char	*word;
-	int		i;
-	int		len;
-	int		delimited;
+	char			*word;
+	int				i;
+	int				len;
 
-	len = -1;
-	if (!is_delim(s[0], delim))
-		while (s[++len] && !(is_delim(s[len], delim)))
-			delimited = 0;
-	else
-		while (s[++len] && is_delim(s[len], delim))
-			delimited = 1;
+	i = 0;
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
 	word = (char *)malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	i = -1;
-	if (delimited == 1)
-		while (s[++i] && (is_delim(s[i], delim) && !(is_space(s[len]))))
-			word[i] = s[i];
-	else
-		while (s[++i] && (!is_delim(s[i], delim) && !(is_space(s[len]))))
-			word[i] = s[i];
+	while (s[i] && s[i] != c)
+	{
+		word[i] = s[i];
+		i++;
+	}
 	word[i] = '\0';
-	printf("%s\n", word);
 	return (word);
 }
 
 char	**ft_split(char *str, char *delim)
 {
-	char	**copy_str;
-	int		args_num;
 	int		i;
+	char	**split;
+	int		num_args;
+	int		word_size;
 
-	if (!str || !delim)
+	if (!str || !str[0])
 		return (NULL);
-	args_num = count_args(str);
-	copy_str = malloc(sizeof(char *) * (args_num + 1));
-	if (!copy_str)
+	num_args = count_args(str);
+	split = malloc(sizeof(char *) * (num_args + 1));
+	if (!split)
 		return (NULL);
 	i = -1;
-	while (++i < args_num)
+	while (++i < num_args)
 	{
-		while (is_delim(*str, delim))
-		{
-			copy_str[i] = copy_args(str, delim);
-			str++;
-		}
-		if (!(is_delim(*str, delim)))
-		{
-			copy_str[i] = copy_args(str, delim);
-			while (*str && !(is_delim(*str, delim)))
-				str++;
-		}
+		word_size = token_len(str);
+		split[i] = malloc(sizeof(char) * (word_size + 1));
+		if (!split[i])
+			return (NULL);
+		split[i] = copy_string(str, *delim);
 	}
-	copy_str[i] = NULL;
-	return (copy_str);
+	split[i] = NULL;
+	return (split);
 }

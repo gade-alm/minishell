@@ -6,11 +6,27 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:35:10 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/08 18:02:23 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:19:15 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	is_space(char str)
+{
+	return (str == ' ' || str == '\t');
+}
+
+int	token_helper(char *str, char c, int i)
+{
+	if (!str[i + 1])
+		return (0);
+	if (c == '"' || c == '\'')
+		i++;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
+}
 
 int	char_delim(char *str, int i, char *delim)
 {
@@ -56,35 +72,39 @@ int	count_args(char *str)
 	return (count);
 }
 
-int	is_delim(char str, char *delim)
+int	token_len(char *str)
 {
 	int	i;
 
 	i = -1;
-	while (delim[++i])
-		if (str == delim[i])
-			return (1);
-	return (0);
-}
-
-int	is_space(char str)
-{
-	return (str == ' ' || str == '\t');
-}
-
-int	is_quotes(char *str, int i, char quote)
-{
-	if (quote == '"')
+	while (str[++i])
 	{
-		while (str[++i])
-			if (str[i] == quote)
-				return (1);
-	}	
-	if (quote == '\'')
-	{
-		while (str[++i])
-			if (str[i] == quote)
-				return (1);
+		if (is_space(str[i]))
+			break ;
+		if (str[i] == '|')
+		{
+			token_helper(str, '|', i);
+			break ;
+		}
+		else if (str[i] == '<' || str[i] == '>')
+		{
+			while (str[i] == '<' || str[i] == '>')
+				i++;
+			break ;
+		}
+		else if (str[i])
+		{
+			while (str[i] && !ft_strrchr(" \t|<>", str[i]))
+			{
+				if (str[i] == '\"')
+					token_helper(str, '\"', i);
+				else if (str[i] == '\'')
+					token_helper(str, '\'', i);
+				if (str[i])
+					i++;
+			}
+			break ;
+		}
 	}
-	return (0);
+	return (i);
 }
