@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:53:03 by gabriel           #+#    #+#             */
-/*   Updated: 2023/02/16 18:01:47 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:21:15 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ t_args	*init_args(void);
 
 //PARSE AREA
 int		count_args(char *str);
-int		is_delim(char str, char *delim);
-char	*copy_args(char **s, int len);
-char	*copy_string(char *str, char delim);
-char	**ft_split(char *str, char *delim);
-int		is_quotes(char *str, int i, char quote);
+int		char_delim(char *str, int i, char *delim);
+char	*ft_word(const char *s, int len);
+char	**ft_split(char **split, char *str, int count);
 int		token_helper(char *str, char c, int i);
 int		token_len(char *str);
 
