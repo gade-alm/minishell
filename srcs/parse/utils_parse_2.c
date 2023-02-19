@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:03:51 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/19 12:02:21 by gabriel          ###   ########.fr       */
+/*   Updated: 2023/02/19 12:29:03 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	check_redirection(char *str)
 	{
 		if (str[i] && (str[i] == '>' || str[i] == '<'))
 		{
+			i++;
 			j = i;
 			while (str[j] == '>' || str[j] == '<')
 			{
