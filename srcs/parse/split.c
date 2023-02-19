@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:39:01 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/17 18:20:58 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:02:02 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,56 +49,29 @@ int	count_args(char *str)
 	return (count);
 }
 
-// char	**ft_split(char *str)
-// {
-// 	int		i;
-// 	char	**split;
-// 	int		num_args;
-// 	int		word_size;
-
-// 	if (!str || !str[0])
-// 		return (NULL);
-// 	num_args = count_args(str);
-// 	split = malloc(sizeof(char *) * (num_args + 1));
-// 	if (!split)
-// 		return (NULL);
-// 	i = -1;
-// 	while (++i < num_args)
-// 	{
-// 		word_size = token_len(str);
-// 		split[i] = malloc(sizeof(char) * (word_size + 1));
-// 		if (!split[i])
-// 			return (NULL);
-// 		split[i] = ft_word(str, word_size);
-// 		str += word_size;
-// 	}
-// 	split[i] = NULL;
-// 	return (split);
-// }
-
-
-char	**ft_split(char **split, char *str, int count)
+char	**ft_split(char *str)
 {
-	int		tok_len;
-	char	*token;
+	int		i;
+	char	**split;
+	int		num_args;
+	int		word_size;
 
-	token = NULL;
-	while (is_space(*str))
-		str++;
-	tok_len = token_len(str);
-	if (tok_len > 0)
-		token = malloc(sizeof(char) * (tok_len + 1));
-	if (token)
-	{
-		split = ft_split(split, str + tok_len, count + 1);
-		token[tok_len] = '\0';
-		while (--tok_len >= 0)
-			token[tok_len] = str[tok_len];
-	}
-	if (!split)
-		split = malloc(sizeof(char *) * (count + 1));
+	if (!str || !str[0])
+		return (NULL);
+	num_args = count_args(str);
+	split = malloc(sizeof(char *) * (num_args + 1));
 	if (!split)
 		return (NULL);
-	split[count] = token;
+	i = -1;
+	while (++i < num_args)
+	{
+		word_size = token_len(str);
+		split[i] = malloc(sizeof(char) * (word_size + 1));
+		if (!split[i])
+			return (NULL);
+		split[i] = ft_word(str, word_size);
+		str += word_size;
+	}
+	split[i] = NULL;
 	return (split);
 }

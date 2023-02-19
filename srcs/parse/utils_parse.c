@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:35:10 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/17 18:28:30 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/02/19 08:14:15 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	token_len(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (is_space(str[i]))
-			break ;
+		i += is_space(str[i]);
 		if (str[i] == '|')
 		{
 			i += token_helper(str, '|', i);
