@@ -1,13 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   receive_args.c                                     :+:      :+:    :+:   */
+/*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 11:51:08 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/01/30 13:33:00 by gade-alm         ###   ########.fr       */
+/*   Created: 2023/03/12 19:13:38 by gabriel           #+#    #+#             */
+/*   Updated: 2023/03/12 19:34:27 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	*ft_strcpysize(char *dest, char *str, int i)
+{
+	int	j;
+
+	j = 0;
+	while (str[i] && !isspace(str[i]))
+	{
+		dest[j] = str[i];
+		i++;
+		j++;
+	}
+	dest[j] = '\0';
+	return (dest);
+}

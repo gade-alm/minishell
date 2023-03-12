@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:03:51 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/19 12:29:03 by gabriel          ###   ########.fr       */
+/*   Updated: 2023/03/12 19:39:39 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ int	check_string(char *str)
 		if (str[i] == '>' || str[i] == '<')
 			if (!check_redirection(str))
 				return (0);
+		if (str[i] == '$')
+			check_env(str, i);
 	}
 	return (1);
 }
