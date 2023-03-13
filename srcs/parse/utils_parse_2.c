@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parse_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:03:51 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/03/12 19:39:39 by gabriel          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:08:34 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,6 @@ int	check_string(char *str)
 		if (str[i] == '>' || str[i] == '<')
 			if (!check_redirection(str))
 				return (0);
-		if (str[i] == '$')
-			check_env(str, i);
 	}
 	return (1);
 }

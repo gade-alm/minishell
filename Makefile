@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
+#    By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 10:52:52 by gabriel           #+#    #+#              #
-#    Updated: 2023/03/12 19:22:25 by gabriel          ###   ########.fr        #
+#    Updated: 2023/03/13 18:03:04 by gade-alm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS		= $(SRCS_DIR)/main.c \
 			$(SRCS_DIR)/parse/split.c \
 			$(SRCS_DIR)/parse/utils_parse.c \
 			$(SRCS_DIR)/parse/utils_parse_2.c \
-			$(SRCS_DIR)/parse/init_args.c \
+			$(SRCS_DIR)/parse/handle_cmd.c \
 			$(SRCS_DIR)/exp/expander.c \
 			$(SRCS_DIR)/exp/exp_utils.c \
 		

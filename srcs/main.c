@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:13:25 by gabriel           #+#    #+#             */
-/*   Updated: 2023/03/12 14:23:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:25:08 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,15 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+	(void)args;
 	while (1)
 	{
 		str = readline("$>>:");
 		if (str && *str)
 			add_history(str);
-		if (check_string(str))
-		{
-			args.cmd = ft_split(str);
-			for (int i = 0; args.cmd[i]; i++)
-				printf("%s\n", args.cmd[i]);
-		}
+		if (str && *str)
+			if (check_string(str))
+				handle_commands(str, init_args());
 		if (ft_strcmp(str, "exit\n"))
 		{
 			free (str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:53:03 by gabriel           #+#    #+#             */
-/*   Updated: 2023/03/12 19:34:40 by gabriel          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:25:15 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int		check_string(char *str);
 int		check_pipe(char *str);
 int		token_helper(char *str, char c, int i);
 int		token_len(char *str);
-char	*check_env(char *str, int i);
+int		handle_commands(char *str, t_args *args);
 void	*ft_strcpysize(char *dest, char *src, int i);
+
+//EXPANDER AREA
+char	*expand_var(char **str, t_args *args);
 
 #endif

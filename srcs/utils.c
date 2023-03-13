@@ -6,7 +6,7 @@
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 12:01:47 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/03 16:19:49 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:02:42 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,11 @@ char	*ft_strchr(const char *s, int c)
 		if (str[a] == '\0')
 			return (NULL);
 	return (&str[a]);
+}
+
+t_args	*init_args(void)
+{
+	static t_args	arguments;
+
+	return (&arguments);
 }

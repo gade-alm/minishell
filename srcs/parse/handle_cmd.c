@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_args.c                                        :+:      :+:    :+:   */
+/*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gade-alm <gade-alm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:44:03 by gade-alm          #+#    #+#             */
-/*   Updated: 2023/02/06 10:59:54 by gade-alm         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:24:46 by gade-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_args	*init_args(void)
+int	handle_commands(char *str, t_args *args)
 {
-	static t_args	arguments;
+	char	**split;
+	int		i;
+	int		j;
 
-	return (&arguments);
+	j = -1;
+	i = -1;
+	split = ft_split(str);
+	while (split[++i])
+	{
+		while (split[++j])
+			if (split[i][j] == '$')
+				expand_var(split[j], args);
+	}
+	return (1);
 }
